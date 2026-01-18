@@ -17,9 +17,10 @@ This is a new project (greenfield) that creates a public GitHub template reposit
 - **YAML-based configuration** for repositories, groups, and rulesets
 - **Configuration groups** to share settings across multiple repositories
 - **Repository rulesets** for branch protection and policy enforcement
-- **CI/CD workflow** for automated Terraform plan/apply
 - **Documentation** for setup, usage, and customization
 - **Example configurations** demonstrating common patterns
+
+> **Note:** CI/CD workflow deferred to future spec - users can implement their own GitHub Actions based on their requirements.
 
 The design is inspired by `gjed/github-configs` and adapted for public template use.
 

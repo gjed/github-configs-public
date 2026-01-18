@@ -23,7 +23,6 @@ This template provides a factory pattern implementation using Terraform and YAML
 - Support repository creation and configuration management
 - Enable configuration groups for DRY configuration
 - Support repository rulesets for branch protection
-- Include example CI/CD workflow for automation
 - Document all features and customization options
 
 **Non-Goals:**
@@ -112,11 +111,9 @@ github-configs-template/
 │           ├── main.tf               # Resources
 │           ├── variables.tf          # Input variables
 │           └── outputs.tf            # Module outputs
-├── .github/
-│   └── workflows/
-│       └── terraform.yml             # CI/CD workflow
 ├── scripts/
-│   └── validate-config.py            # Configuration validation
+│   ├── validate-config.py            # Configuration validation
+│   └── onboard-repos.sh              # Import existing repositories
 ├── docs/
 │   ├── QUICKSTART.md                 # Getting started guide
 │   ├── CONFIGURATION.md              # Configuration reference
@@ -159,4 +156,6 @@ N/A - This is a new template project, not a migration.
 
 2. **Should we support importing existing repositories?** The module works with existing repos, but import workflow could be documented better.
 
-3. **What CI/CD workflow should we include?** Options: plan-only on PR, auto-apply on main, manual approval.
+## Deferred to Future Specs
+
+- **CI/CD workflow**: Users can implement their own GitHub Actions workflow based on their requirements. Common patterns could be documented in a future spec.
