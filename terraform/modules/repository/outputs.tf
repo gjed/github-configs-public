@@ -1,0 +1,41 @@
+output "name" {
+  description = "Repository name"
+  value       = github_repository.this.name
+}
+
+output "full_name" {
+  description = "Full repository name (org/repo)"
+  value       = github_repository.this.full_name
+}
+
+output "html_url" {
+  description = "Repository URL"
+  value       = github_repository.this.html_url
+}
+
+output "ssh_clone_url" {
+  description = "SSH clone URL"
+  value       = github_repository.this.ssh_clone_url
+}
+
+output "http_clone_url" {
+  description = "HTTP clone URL"
+  value       = github_repository.this.http_clone_url
+}
+
+output "visibility" {
+  description = "Repository visibility"
+  value       = github_repository.this.visibility
+}
+
+# Note: default_branch attribute is deprecated but still functional
+# The new primary_branch block should be used for managing default branch
+output "default_branch" {
+  description = "Default branch name"
+  value       = github_repository.this.default_branch
+}
+
+output "repo_id" {
+  description = "Repository ID"
+  value       = github_repository.this.repo_id
+}

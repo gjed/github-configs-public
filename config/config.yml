@@ -1,0 +1,32 @@
+# Common Configuration
+# Organization-level settings and global defaults
+
+# GitHub organization or username
+# Replace with your organization name or GitHub username
+organization: your-org-name
+
+# GitHub subscription tier
+# Options: free, pro, team, enterprise
+# This affects which features are available:
+# - free: Rulesets only work on public repositories
+# - pro: Rulesets work on public and private repositories (personal accounts)
+# - team: Full ruleset support including push rulesets for private/internal repos
+# - enterprise: Full feature set
+subscription: free
+
+# Default repository settings (applied before groups)
+# These serve as fallback values when not specified in groups or repositories
+defaults:
+  visibility: private
+  has_wiki: false
+  has_issues: false
+  has_projects: false
+  has_downloads: true
+  has_discussions: false
+  allow_merge_commit: true
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  allow_update_branch: false
+  delete_branch_on_merge: false
+  web_commit_signoff_required: false

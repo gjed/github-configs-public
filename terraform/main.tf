@@ -1,0 +1,62 @@
+# GitHub Organization Infrastructure as Code
+# Configuration is loaded from YAML files in the config/ directory
+
+terraform {
+  required_version = ">= 1.0"
+
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
+  }
+
+  # Uncomment to configure remote backend for team collaboration
+  # backend "s3" {
+  #   bucket = "your-terraform-state-bucket"
+  #   key    = "github-org/terraform.tfstate"
+  #   region = "us-east-1"
+  # }
+}
+
+provider "github" {
+  # Organization is read from config/config.yml
+  owner = local.github_org
+
+  # Token is read from GITHUB_TOKEN environment variable
+  # Token must have repo and admin:org scopes
+}
+
+# Manage all repositories using YAML configuration
+module "repositories" {
+  source = "./modules/repository"
+
+  for_each = local.repositories
+
+  name         = each.value.name
+  description  = each.value.description
+  homepage_url = each.value.homepage_url
+  visibility   = each.value.visibility
+
+  has_wiki        = each.value.has_wiki
+  has_issues      = each.value.has_issues
+  has_projects    = each.value.has_projects
+  has_downloads   = each.value.has_downloads
+  has_discussions = each.value.has_discussions
+
+  allow_merge_commit          = each.value.allow_merge_commit
+  allow_squash_merge          = each.value.allow_squash_merge
+  allow_rebase_merge          = each.value.allow_rebase_merge
+  allow_auto_merge            = each.value.allow_auto_merge
+  allow_update_branch         = each.value.allow_update_branch
+  delete_branch_on_merge      = each.value.delete_branch_on_merge
+  web_commit_signoff_required = each.value.web_commit_signoff_required
+
+  topics = each.value.topics
+  teams  = each.value.teams
+
+  license_template = each.value.license_template
+
+  # Apply rulesets based on repository groups
+  rulesets = each.value.rulesets
+}

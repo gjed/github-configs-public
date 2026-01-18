@@ -1,0 +1,176 @@
+variable "name" {
+  description = "Repository name"
+  type        = string
+}
+
+variable "description" {
+  description = "Repository description"
+  type        = string
+}
+
+variable "visibility" {
+  description = "Repository visibility (public, private, or internal)"
+  type        = string
+  default     = "private"
+
+  validation {
+    condition     = contains(["public", "private", "internal"], var.visibility)
+    error_message = "Visibility must be public, private, or internal."
+  }
+}
+
+variable "has_wiki" {
+  description = "Enable repository wiki"
+  type        = bool
+  default     = false
+}
+
+variable "has_issues" {
+  description = "Enable repository issues"
+  type        = bool
+  default     = false
+}
+
+variable "has_projects" {
+  description = "Enable repository projects"
+  type        = bool
+  default     = false
+}
+
+variable "has_downloads" {
+  description = "Enable repository downloads"
+  type        = bool
+  default     = true
+}
+
+variable "has_discussions" {
+  description = "Enable repository discussions"
+  type        = bool
+  default     = false
+}
+
+variable "allow_merge_commit" {
+  description = "Allow merge commits"
+  type        = bool
+  default     = true
+}
+
+variable "allow_squash_merge" {
+  description = "Allow squash merges"
+  type        = bool
+  default     = true
+}
+
+variable "allow_rebase_merge" {
+  description = "Allow rebase merges"
+  type        = bool
+  default     = true
+}
+
+variable "delete_branch_on_merge" {
+  description = "Automatically delete head branch after merging"
+  type        = bool
+  default     = false
+}
+
+variable "allow_auto_merge" {
+  description = "Allow auto-merge on pull requests"
+  type        = bool
+  default     = false
+}
+
+variable "allow_update_branch" {
+  description = "Always suggest updating pull request branches"
+  type        = bool
+  default     = false
+}
+
+variable "web_commit_signoff_required" {
+  description = "Require contributors to sign off on web-based commits"
+  type        = bool
+  default     = false
+}
+
+variable "topics" {
+  description = "Repository topics"
+  type        = list(string)
+  default     = []
+}
+
+variable "auto_init" {
+  description = "Initialize repository with README"
+  type        = bool
+  default     = false
+}
+
+variable "gitignore_template" {
+  description = "Gitignore template to use"
+  type        = string
+  default     = null
+}
+
+variable "license_template" {
+  description = "License template to use"
+  type        = string
+  default     = null
+}
+
+variable "homepage_url" {
+  description = "URL of a page describing the project"
+  type        = string
+  default     = null
+}
+
+variable "teams" {
+  description = "Map of team slugs to their permission level (pull, triage, push, maintain, admin)"
+  type        = map(string)
+  default     = {}
+}
+
+variable "collaborators" {
+  description = "Map of GitHub usernames to their permission level (pull, triage, push, maintain, admin)"
+  type        = map(string)
+  default     = {}
+}
+
+variable "rulesets" {
+  description = "Map of repository rulesets to apply"
+  type = map(object({
+    target      = string
+    enforcement = string
+    conditions = object({
+      ref_name = object({
+        include = list(string)
+        exclude = list(string)
+      })
+    })
+    rules = list(object({
+      type    = string
+      enabled = optional(bool, true)
+      parameters = optional(object({
+        required_approving_review_count   = optional(number)
+        dismiss_stale_reviews_on_push     = optional(bool)
+        require_code_owner_review         = optional(bool)
+        require_last_push_approval        = optional(bool)
+        required_review_thread_resolution = optional(bool)
+        required_checks = optional(list(object({
+          context        = string
+          integration_id = optional(number)
+        })))
+        strict_required_status_checks_policy = optional(bool)
+        update_allows_fetch_and_merge        = optional(bool)
+        required_deployment_environments     = optional(list(string))
+        operator                             = optional(string)
+        pattern                              = optional(string)
+        name                                 = optional(string)
+        negate                               = optional(bool)
+      }))
+    }))
+    bypass_actors = optional(list(object({
+      actor_id    = number
+      actor_type  = string
+      bypass_mode = optional(string)
+    })))
+  }))
+  default = {}
+}

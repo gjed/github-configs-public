@@ -1,0 +1,55 @@
+# Configuration Groups
+# Define standard settings for repository types that can be combined
+# Groups are applied sequentially - later groups override single values, lists are merged
+
+# Base configuration applied to all repos in your organization
+# Customize this with your organization's default teams
+base:
+  teams: {}
+    # Example: Add your teams here
+    # devops: admin
+    # developers: push
+
+# OSS - Open Source repositories
+# Use this group for public, open-source projects
+oss:
+  visibility: public
+  has_wiki: true
+  has_issues: true
+  has_projects: false
+  has_downloads: true
+  has_discussions: false
+  allow_merge_commit: false
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  allow_update_branch: true
+  delete_branch_on_merge: true
+  web_commit_signoff_required: true
+  topics:
+    - open-source
+  rulesets:
+    - oss-main-protection
+
+# Internal - Private repositories
+# Use this group for internal/private projects
+# Note: Rulesets require a paid GitHub plan for private repos
+internal:
+  visibility: private
+  has_wiki: true
+  has_issues: true
+  has_projects: false
+  has_downloads: true
+  has_discussions: false
+  allow_merge_commit: false
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  allow_update_branch: true
+  delete_branch_on_merge: true
+  web_commit_signoff_required: true
+  topics:
+    - internal
+  # Uncomment below if you have a paid GitHub plan
+  # rulesets:
+  #   - internal-main-protection
