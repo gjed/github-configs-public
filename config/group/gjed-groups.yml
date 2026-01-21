@@ -14,7 +14,6 @@ oss:
   has_wiki: true
   has_issues: true
   has_projects: false
-  has_downloads: false
   has_discussions: true
   allow_merge_commit: true
   allow_squash_merge: true

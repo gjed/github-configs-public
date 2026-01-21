@@ -41,7 +41,6 @@ module "repositories" {
   has_wiki        = each.value.has_wiki
   has_issues      = each.value.has_issues
   has_projects    = each.value.has_projects
-  has_downloads   = each.value.has_downloads
   has_discussions = each.value.has_discussions
 
   allow_merge_commit          = each.value.allow_merge_commit

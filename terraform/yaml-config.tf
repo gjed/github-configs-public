@@ -730,7 +730,7 @@ locals {
       has_wiki                    = lookup(repo_config, "has_wiki", lookup(local.merged_configs[repo_name], "has_wiki", false))
       has_issues                  = lookup(repo_config, "has_issues", lookup(local.merged_configs[repo_name], "has_issues", false))
       has_projects                = lookup(repo_config, "has_projects", lookup(local.merged_configs[repo_name], "has_projects", false))
-      has_downloads               = lookup(repo_config, "has_downloads", lookup(local.merged_configs[repo_name], "has_downloads", true))
+
       has_discussions             = lookup(repo_config, "has_discussions", lookup(local.merged_configs[repo_name], "has_discussions", false))
       allow_merge_commit          = lookup(repo_config, "allow_merge_commit", lookup(local.merged_configs[repo_name], "allow_merge_commit", true))
       allow_squash_merge          = lookup(repo_config, "allow_squash_merge", lookup(local.merged_configs[repo_name], "allow_squash_merge", true))

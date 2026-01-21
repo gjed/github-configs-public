@@ -37,12 +37,6 @@ variable "has_projects" {
   default     = false
 }
 
-variable "has_downloads" {
-  description = "Enable repository downloads"
-  type        = bool
-  default     = true
-}
-
 variable "has_discussions" {
   description = "Enable repository discussions"
   type        = bool
