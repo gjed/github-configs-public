@@ -86,7 +86,32 @@ secure-defaults:
       verified_allowed: true
 ```
 
-### Decision 5: Subscription Tier Handling
+### Decision 5: Organization vs Repository Settings (Policy Ceiling)
+
+**What:** Organization-level Actions settings act as a **policy ceiling**, not defaults that
+repositories can override.
+
+**Why:** This matches GitHub's actual permission model. Organization settings restrict what
+repositories can do; they cannot be escalated by repository settings.
+
+**Behavior:**
+
+| Org Setting | Repo Setting | Result |
+| ----------- | ------------ | ------ |
+| `allowed_actions: local_only` | `allowed_actions: all` | **Error** or org wins (repo cannot escalate) |
+| `allowed_actions: all` | `allowed_actions: selected` | Repo wins (more restrictive is allowed) |
+| `default_workflow_permissions: read` | `write` | Depends on org's `can_approve_pull_request_reviews` |
+
+**Implementation approach:**
+
+- Document that org settings are enforced by GitHub, not by our Terraform
+- Repository settings that violate org policy will fail at `terraform apply` time (GitHub API error)
+- Consider adding validation to warn users before apply
+
+**Note:** This differs from our group inheritance model where repository settings override group
+settings. Organization Actions settings are enforced by GitHub itself, not our configuration layer.
+
+### Decision 6: Subscription Tier Handling
 
 **What:** Skip unsupported features for lower subscription tiers with warnings, similar to ruleset handling.
 
