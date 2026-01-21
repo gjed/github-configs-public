@@ -1,0 +1,123 @@
+# gjed Organization Groups
+# Custom configuration groups for gjed repositories
+
+# gjed - Base configuration for gjed organization repositories
+gjed:
+  teams: {}
+    # Add your teams here
+    # devops: admin
+
+# OSS - Open Source repositories
+# Use this group for public, open-source projects
+oss:
+  visibility: public
+  has_wiki: true
+  has_issues: true
+  has_projects: false
+  has_downloads: false
+  has_discussions: true
+  allow_merge_commit: true
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  allow_update_branch: true
+  delete_branch_on_merge: true
+  web_commit_signoff_required: true
+  require_linear_history: true
+  topics:
+    - oss
+  rulesets:
+    - gjed-oss-main
+
+  # Comprehensive Dependabot configuration for gjed repositories
+  dependabot:
+    version: 2
+    updates:
+      # GitHub Actions - keep workflow dependencies up to date
+      - package_ecosystem: github-actions
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        groups:
+          actions:
+            patterns:
+              - "*"
+        commit_message:
+          prefix: "ci"
+
+      # Terraform providers and modules
+      - package_ecosystem: terraform
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        groups:
+          terraform:
+            patterns:
+              - "*"
+        commit_message:
+          prefix: "chore"
+
+      # Python dependencies (pip/requirements.txt)
+      - package_ecosystem: pip
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        groups:
+          python-deps:
+            patterns:
+              - "*"
+            update_types:
+              - minor
+              - patch
+        commit_message:
+          prefix: "chore"
+
+      # Docker base images
+      - package_ecosystem: docker
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        commit_message:
+          prefix: "chore"
+
+      # npm dependencies (for JS/TS projects)
+      - package_ecosystem: npm
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        groups:
+          npm-minor-patch:
+            patterns:
+              - "*"
+            update_types:
+              - minor
+              - patch
+        commit_message:
+          prefix: "chore"
+
+      # Go modules
+      - package_ecosystem: gomod
+        directory: "/"
+        schedule:
+          interval: weekly
+          day: monday
+        open_pull_requests_limit: 5
+        groups:
+          go-deps:
+            patterns:
+              - "*"
+            update_types:
+              - minor
+              - patch
+        commit_message:
+          prefix: "chore"

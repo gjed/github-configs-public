@@ -1,0 +1,48 @@
+# gjed Public Repository Configurations
+# Public/OSS repositories managed by gjed organization
+#
+# These repositories use the gjed + oss groups for configuration.
+
+# GitHub Profile
+
+gjed:
+  description: "Config files for my GitHub profile."
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+
+# OSS Projects
+
+jenkins-opentelemetry-dashboards:
+  description: "OpenTelemetry dashboards for Jenkins monitoring"
+  groups: ["gjed", "oss"]
+  license: "apache-2.0"
+  topics:
+    - jenkins
+    - opentelemetry
+    - grafana
+
+github-configs-template:
+  description: "Github repository configurations managed via YAML"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - terraform
+
+# Legacy/Archive candidates
+
+wireguard-prometheus-exporter-mod:
+  description: "Docker mod for wireguard prometheus exporter"
+  groups: ["gjed", "oss"]
+  topics:
+    - wireguard
+    - prometheus
+    - docker
+
+k3s-demo:
+  description: "k3s-demo"
+  groups: ["gjed", "oss"]
+  topics:
+    - k3s
+    - kubernetes
+    - demo
