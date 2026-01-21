@@ -227,13 +227,20 @@ resource "github_repository_webhook" "this" {
   active = each.value.active
 }
 
+# Data source to get repository details including default branch
+data "github_repository" "this" {
+  name = github_repository.this.name
+
+  depends_on = [github_repository.this]
+}
+
 # Dependabot configuration file
 # Creates .github/dependabot.yml when dependabot config is provided
 resource "github_repository_file" "dependabot" {
   count = var.dependabot != null ? 1 : 0
 
   repository          = github_repository.this.name
-  branch              = github_repository.this.default_branch
+  branch              = data.github_repository.this.default_branch
   file                = ".github/dependabot.yml"
   content             = local.dependabot_yaml
   commit_message      = "chore: update Dependabot configuration [terraform]"
@@ -250,7 +257,7 @@ resource "github_repository_file" "renovate" {
   count = var.renovate != null ? 1 : 0
 
   repository          = github_repository.this.name
-  branch              = github_repository.this.default_branch
+  branch              = data.github_repository.this.default_branch
   file                = var.renovate_file_path
   content             = local.renovate_json
   commit_message      = "chore: update Renovate configuration [terraform]"
