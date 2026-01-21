@@ -29,6 +29,13 @@ github-configs-template:
     - github
     - terraform
 
+github-configs-public:
+  description: "Github repository configurations managed via YAML"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - terraform
+
 # Legacy/Archive candidates
 
 wireguard-prometheus-exporter-mod:
