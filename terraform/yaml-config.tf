@@ -121,14 +121,16 @@ locals {
   ]...)
 
   # Extract values from YAML
-  github_org    = local.common_config.organization
-  subscription  = lookup(local.common_config, "subscription", "free")
-  config_groups = local.groups_config
-  repos_yaml    = local.repos_config
+  github_org      = local.common_config.organization
+  is_organization = lookup(local.common_config, "is_organization", true)
+  subscription    = lookup(local.common_config, "subscription", "free")
+  config_groups   = local.groups_config
+  repos_yaml      = local.repos_config
 
   # Organization-level actions configuration
   # Defaults to null if not specified (no org-level actions resource created)
-  org_actions_config = lookup(local.common_config, "actions", null)
+  # Only applicable for organizations, not personal accounts
+  org_actions_config = local.is_organization ? lookup(local.common_config, "actions", null) : null
 
   # Subscription tier feature availability
   # - free: Rulesets only work on public repositories
@@ -726,10 +728,10 @@ locals {
       config_group = join(", ", repo_config.groups) # Store all groups for reference
 
       # Apply repo-specific overrides, falling back to merged group config
-      visibility                  = lookup(repo_config, "visibility", lookup(local.merged_configs[repo_name], "visibility", "private"))
-      has_wiki                    = lookup(repo_config, "has_wiki", lookup(local.merged_configs[repo_name], "has_wiki", false))
-      has_issues                  = lookup(repo_config, "has_issues", lookup(local.merged_configs[repo_name], "has_issues", false))
-      has_projects                = lookup(repo_config, "has_projects", lookup(local.merged_configs[repo_name], "has_projects", false))
+      visibility   = lookup(repo_config, "visibility", lookup(local.merged_configs[repo_name], "visibility", "private"))
+      has_wiki     = lookup(repo_config, "has_wiki", lookup(local.merged_configs[repo_name], "has_wiki", false))
+      has_issues   = lookup(repo_config, "has_issues", lookup(local.merged_configs[repo_name], "has_issues", false))
+      has_projects = lookup(repo_config, "has_projects", lookup(local.merged_configs[repo_name], "has_projects", false))
 
       has_discussions             = lookup(repo_config, "has_discussions", lookup(local.merged_configs[repo_name], "has_discussions", false))
       allow_merge_commit          = lookup(repo_config, "allow_merge_commit", lookup(local.merged_configs[repo_name], "allow_merge_commit", true))

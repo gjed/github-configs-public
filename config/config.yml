@@ -5,6 +5,11 @@
 # Replace with your organization name or GitHub username
 organization: gjed
 
+# Account type: organization or user
+# Set to false for personal GitHub accounts (users)
+# Organization-level Actions permissions are only available for organizations
+is_organization: false
+
 # GitHub subscription tier
 # Options: free, pro, team, enterprise
 # This affects which features are available:

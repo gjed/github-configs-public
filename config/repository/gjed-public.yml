@@ -36,6 +36,13 @@ github-configs-public:
     - github
     - terraform
 
+whisperx-api-server:
+  description: "FastAPI server for WhisperX transcription library"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - whisperx
+
 # Legacy/Archive candidates
 
 wireguard-prometheus-exporter-mod:

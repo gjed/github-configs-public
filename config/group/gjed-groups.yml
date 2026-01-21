@@ -28,6 +28,7 @@ oss:
   rulesets:
     - gjed-oss-main
 
+dependabot:
   # Comprehensive Dependabot configuration for gjed repositories
   dependabot:
     version: 2
