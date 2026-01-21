@@ -1,4 +1,4 @@
-# GitHub Organization Terraform Template
+# GitHub Organization Terraform for Gjed
 
 > **Note:** This repository is a clone of [github-configs-template](https://github.com/gjed/github-configs-template) used to manage gjed's public repositories and serves as a working example of the template in action.
 
