@@ -1,0 +1,109 @@
+"registries": null
+"updates":
+- "commit-message":
+    "prefix": "chore"
+  "directory": "/"
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "docker"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+- "commit-message":
+    "prefix": "ci"
+  "directory": "/"
+  "groups":
+    "actions":
+      "applies_to": null
+      "dependency_type": null
+      "exclude_patterns": null
+      "patterns":
+      - "*"
+      "update_types": null
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "github-actions"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+- "commit-message":
+    "prefix": "chore"
+  "directory": "/"
+  "groups":
+    "go-deps":
+      "applies_to": null
+      "dependency_type": null
+      "exclude_patterns": null
+      "patterns":
+      - "*"
+      "update_types":
+      - "minor"
+      - "patch"
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "gomod"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+- "commit-message":
+    "prefix": "chore"
+  "directory": "/"
+  "groups":
+    "npm-minor-patch":
+      "applies_to": null
+      "dependency_type": null
+      "exclude_patterns": null
+      "patterns":
+      - "*"
+      "update_types":
+      - "minor"
+      - "patch"
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "npm"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+- "commit-message":
+    "prefix": "chore"
+  "directory": "/"
+  "groups":
+    "python-deps":
+      "applies_to": null
+      "dependency_type": null
+      "exclude_patterns": null
+      "patterns":
+      - "*"
+      "update_types":
+      - "minor"
+      - "patch"
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "pip"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+- "commit-message":
+    "prefix": "chore"
+  "directory": "/"
+  "groups":
+    "terraform":
+      "applies_to": null
+      "dependency_type": null
+      "exclude_patterns": null
+      "patterns":
+      - "*"
+      "update_types": null
+  "open-pull-requests-limit": 5
+  "package-ecosystem": "terraform"
+  "schedule":
+    "day": "monday"
+    "interval": "weekly"
+    "time": null
+    "timezone": null
+"version": 2
