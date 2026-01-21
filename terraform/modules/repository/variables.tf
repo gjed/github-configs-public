@@ -85,6 +85,12 @@ variable "web_commit_signoff_required" {
   default     = false
 }
 
+variable "vulnerability_alerts" {
+  description = "Enable security alerts for vulnerable dependencies"
+  type        = bool
+  default     = true
+}
+
 variable "topics" {
   description = "Repository topics"
   type        = list(string)

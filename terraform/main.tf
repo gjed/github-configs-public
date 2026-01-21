@@ -56,6 +56,7 @@ module "repositories" {
   allow_update_branch         = each.value.allow_update_branch
   delete_branch_on_merge      = each.value.delete_branch_on_merge
   web_commit_signoff_required = each.value.web_commit_signoff_required
+  vulnerability_alerts        = each.value.vulnerability_alerts
 
   topics = each.value.topics
   teams  = each.value.teams
@@ -71,10 +72,6 @@ module "repositories" {
   # Apply webhooks from groups and repo-specific definitions
   webhooks = each.value.webhooks
 
-  # Dependency update configurations
-  dependabot         = each.value.dependabot
-  renovate           = each.value.renovate
-  renovate_file_path = each.value.renovate_file_path
 }
 
 # Organization-level Actions permissions
