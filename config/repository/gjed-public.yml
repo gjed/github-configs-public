@@ -14,6 +14,15 @@ gjed:
 
 # OSS Projects
 
+# https://github.com/gjed/fosdem-video-downloader
+fosdem-video-downloader:
+  description: "A tool to download videos from FOSDEM"
+  groups: ["gjed", "oss"]
+  topics:
+    - fosdem
+    - jellyfin
+    - downloader
+    - python
 
 # https://github.com/gjed/jenkins-opentelemetry-dashboards
 jenkins-opentelemetry-dashboards:
