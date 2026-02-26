@@ -34,8 +34,8 @@ jenkins-opentelemetry-dashboards:
     - opentelemetry
     - grafana
 
-# https://github.com/gjed/github-configs-template
-github-configs-template:
+# https://github.com/gjed/github-as-yaml
+github-as-yaml:
   description: "Github repository configurations managed via YAML"
   groups: ["gjed", "oss", "dependabot"]
   topics:
