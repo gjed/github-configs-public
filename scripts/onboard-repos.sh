@@ -63,7 +63,7 @@ FILTER=""
 DRY_RUN=false
 REPOS=()
 
-# Configuration paths (matching Terraform's yaml-config.tf)
+# Configuration paths
 REPOSITORY_CONFIG_PATH="$PROJECT_ROOT/config/repository"
 
 # Helper functions
@@ -214,7 +214,7 @@ import_repo() {
         return 1
     fi
 
-    local import_addr="module.repositories[\"$repo\"].github_repository.this"
+    local import_addr="module.github_org.module.repositories[\"$repo\"].github_repository.this"
     # GitHub provider expects just the repo name when owner is configured in provider
     local import_id="$repo"
 
@@ -313,7 +313,7 @@ main() {
     if [[ "$GENERATE_YAML" == true ]]; then
         log_info "Generating YAML entries for ${#REPOS[@]} repositories..."
         echo ""
-        echo "# Add the following to config/repositories.yml:"
+        echo "# Add the following to config/repository/*.yml:"
         echo "# ================================================"
 
         for repo in "${REPOS[@]}"; do

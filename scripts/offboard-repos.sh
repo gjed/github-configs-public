@@ -96,7 +96,7 @@ list_repos_in_state() {
 
     cd "$TF_DIR"
     local repos
-    repos=$(terraform state list 2>/dev/null | grep 'module.repositories\[' | sed 's/.*\["\([^"]*\)"\].*/\1/' | sort -u)
+    repos=$(terraform state list 2>/dev/null | grep 'module.github_org.module.repositories\[.*\]\.github_repository\.this$' | sed 's/.*\["\([^"]*\)"\].*/\1/' | sort -u)
 
     if [[ -z "$repos" ]]; then
         log_warn "No repositories found in Terraform state"
@@ -125,7 +125,7 @@ remove_from_state() {
 
     # Find all state entries for this repo
     local entries
-    entries=$(terraform state list 2>/dev/null | grep "module.repositories\[\"$repo\"\]" || true)
+    entries=$(terraform state list 2>/dev/null | grep "module.github_org.module.repositories\[\"$repo\"\]" || true)
 
     if [[ -z "$entries" ]]; then
         log_warn "$repo not found in Terraform state"
