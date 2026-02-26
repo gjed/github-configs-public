@@ -1,4 +1,4 @@
-# Contributing to GitHub Configs Template
+# Contributing to GitHub Configs Public
 
 Thank you for your interest in contributing! This document provides guidelines and instructions
 for contributing to this project.
@@ -57,8 +57,8 @@ Feature requests are welcome! Please:
 1. Clone your fork:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/github-configs-template.git
-   cd github-configs-template
+   git clone https://github.com/YOUR_USERNAME/github-configs-public.git
+   cd github-configs-public
    ```
 
 2. Install pre-commit hooks:
@@ -232,14 +232,17 @@ corresponding validation for tag-specific rules.
 
 ```text
 .
-├── config.yml              # Example configuration
-├── main.tf                 # Root module entry point
-├── variables.tf            # Input variables
-├── outputs.tf              # Output values
-├── versions.tf             # Provider requirements
-├── modules/
-│   └── repository/         # Repository sub-module
-├── examples/               # Usage examples
+├── config/
+│   ├── config.yml          # Organization settings
+│   ├── group/              # Shared group configurations
+│   ├── repository/         # Repository definitions
+│   ├── ruleset/            # Ruleset definitions
+│   └── webhook/            # Webhook definitions
+├── terraform/
+│   ├── main.tf             # Module call to github-as-yaml
+│   ├── variables.tf        # Input variables
+│   └── outputs.tf          # Output values
+├── scripts/                # Onboarding/offboarding helpers
 └── docs/                   # Additional documentation
 ```
 
