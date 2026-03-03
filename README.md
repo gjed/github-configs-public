@@ -1,6 +1,6 @@
 # GitHub Organization Terraform for Gjed
 
-> **Note:** This repository consumes the [github-as-yaml](https://github.com/gjed/github-as-yaml) Terraform module to manage gjed's public repositories and serves as a working example of the module in action.
+> **Note:** This repository consumes the [config-as-yaml](https://registry.terraform.io/modules/gjed/config-as-yaml/github/latest) Terraform module to manage gjed's public repositories and serves as a working example of the module in action.
 
 Manage your GitHub organization's repositories as code using Terraform and YAML configuration.
 
