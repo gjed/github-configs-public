@@ -239,7 +239,7 @@ corresponding validation for tag-specific rules.
 │   ├── ruleset/            # Ruleset definitions
 │   └── webhook/            # Webhook definitions
 ├── terraform/
-│   ├── main.tf             # Module call to github-as-yaml
+│   ├── main.tf             # Module call to terraform-github-config-as-yaml
 │   ├── variables.tf        # Input variables
 │   └── outputs.tf          # Output values
 ├── scripts/                # Onboarding/offboarding helpers
