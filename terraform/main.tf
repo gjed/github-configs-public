@@ -1,5 +1,5 @@
 # GitHub Organization Infrastructure as Code
-# Uses the github-as-yaml module to manage repositories from YAML config.
+# Uses the terraform-github-config-as-yaml module to manage repositories from YAML config.
 #
 # Prerequisites:
 #   export GITHUB_TOKEN="ghp_..."
@@ -38,8 +38,8 @@ provider "github" {
 }
 
 module "github_org" {
-  # Pin to a specific version tag for reproducible builds.
-  source = "github.com/gjed/github-as-yaml//terraform?ref=1.0.0"
+  source  = "gjed/config-as-yaml/github"
+  version = "~> 1.0"
 
   # Path to the config directory relative to this file.
   # Must be a static string - computed values are not supported.
