@@ -57,3 +57,12 @@ whisperx-api-server:
   topics:
     - github
     - whisperx
+
+# https://github.com/gjed/sinapsi-converter
+sinapsi-converter:
+  description: "Simple tool to convert Sinapsi CSV to XLSX files"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - sinapsi
+
