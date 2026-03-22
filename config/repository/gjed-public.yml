@@ -66,6 +66,14 @@ sinapsi-converter:
     - github
     - sinapsi
 
+# https://github.com/gjed/siemens-converter
+siemens-converter:
+  description: "Simple tool to convert siemens CSV to XLSX files"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - siemens
+
 # https://github.com/gjed/workshop-2026-k8s
 workshop-2026-k8s:
   description: "Kubernetes workshop for 2026 IDI Devops Bologna"
