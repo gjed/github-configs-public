@@ -74,6 +74,16 @@ siemens-converter:
     - github
     - siemens
 
+# https://github.com/gjed/cieverona-bot
+cieverona-bot:
+  description: "Bot for get notified when CIE appointments are available in Verona"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - cie
+    - verona
+    - bot
+
 # https://github.com/gjed/workshop-2026-k8s
 workshop-2026-k8s:
   description: "Kubernetes workshop for 2026 IDI Devops Bologna"
