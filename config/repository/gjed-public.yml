@@ -84,6 +84,14 @@ cieverona-bot:
     - verona
     - bot
 
+# https://github.com/gjed/sembenini-bot
+sembenini-bot:
+  description: "Bot for get notified when Dr. Paolo Sembenini appointments are available in Verona"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - bot
+
 # https://github.com/gjed/workshop-2026-k8s
 workshop-2026-k8s:
   description: "Kubernetes workshop for 2026 IDI Devops Bologna"
