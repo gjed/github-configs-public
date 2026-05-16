@@ -50,6 +50,18 @@ github-configs-public:
     - github
     - terraform
 
+# Demos for talks
+
+# https://github.com/gjed/demo-otel-weaver
+demo-otel-weaver:
+  description: "Demo for OpenTelemetry Weaver talk"
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+    - opentelemetry
+    - weaver
+    - demo
+
 # Personal utilities
 
 # https://github.com/gjed/whisperx-api-server
