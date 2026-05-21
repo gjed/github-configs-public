@@ -1,0 +1,9 @@
+# GitHub Profile
+# Repositories related to the gjed GitHub profile itself
+
+# https://github.com/gjed/gjed
+gjed:
+  description: "Config files for my GitHub profile."
+  groups: ["gjed", "oss"]
+  topics:
+    - github
