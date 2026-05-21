@@ -47,3 +47,12 @@ demo-otel-weaver:
     - weaver
     - demo
 
+# https://github.com/gjed/renovate-exporter
+renovate-exporter:
+  description: "OpenTelemetry exporter for GitHub Renovate"
+  groups: ["gjed", "oss"]
+  topics:
+    - renovate
+    - opentelemetry
+    - exporter
+
