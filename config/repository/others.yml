@@ -1,0 +1,8 @@
+# https://github.com/gjed/songbooks
+songbooks:
+  description: "Songbooks for singing with friends"
+  groups: ["gjed", "oss"]
+  topics:
+    - songbooks
+    - music
+    - ukulele
