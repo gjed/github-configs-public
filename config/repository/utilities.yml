@@ -1,6 +1,14 @@
 # Personal Utilities
 # Small personal tools and automation bots
 
+# https://github.com/gjed/renovate-config
+renovate-config:
+  description: "Configuration for Renovate bot"
+  groups: ["gjed", "oss", "dependabot"]
+  topics:
+    - github
+    - renovate
+
 # https://github.com/gjed/whisperx-api-server
 whisperx-api-server:
   description: "FastAPI server for WhisperX transcription library"
