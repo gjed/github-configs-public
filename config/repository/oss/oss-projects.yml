@@ -24,7 +24,7 @@ jenkins-opentelemetry-dashboards:
 # https://github.com/gjed/terraform-github-config-as-yaml
 terraform-github-config-as-yaml:
   description: "Github repository configurations managed via YAML"
-  groups: ["gjed", "oss", "dependabot"]
+  groups: ["gjed", "oss"]
   topics:
     - github
     - terraform
@@ -32,7 +32,7 @@ terraform-github-config-as-yaml:
 # https://github.com/gjed/github-configs-public
 github-configs-public:
   description: "Github repository configurations managed via YAML"
-  groups: ["gjed", "oss", "dependabot"]
+  groups: ["gjed", "oss"]
   topics:
     - github
     - terraform
