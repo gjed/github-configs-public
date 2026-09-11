@@ -9,14 +9,17 @@
 #   ./scripts/onboard-repos.sh [OPTIONS] [REPO_NAMES...]
 #
 # Options:
-#   -o, --org ORG         GitHub organization (default: from config/config.yml)
-#   -g, --groups GROUPS   Comma-separated list of groups (default: base)
-#   -y, --generate-yaml   Generate YAML entries for repositories.yml
-#   -i, --import          Import repositories into Terraform state
-#   -l, --list            List all repositories in the organization
-#   -f, --filter PATTERN  Filter repositories by name pattern (with --list)
-#   -d, --dry-run         Show what would be done without making changes
-#   -h, --help            Show this help message
+#   -o, --org ORG             GitHub organization (default: from config/config.yml)
+#   -g, --groups GROUPS       Comma-separated list of groups (default: base)
+#   -y, --generate-yaml       Generate YAML entries for repositories.yml
+#   -i, --import              Import repositories into Terraform state
+#   -l, --list                List all repositories in the organization
+#   -f, --filter PATTERN      Filter repositories by name pattern (with --list)
+#   -m, --module-path PREFIX  Terraform module path prefix to prepend to resource
+#                             addresses (e.g. "module.github_org." for wrapped
+#                             consumers). Default: "" (direct layout).
+#   -d, --dry-run             Show what would be done without making changes
+#   -h, --help                Show this help message
 #
 # Examples:
 #   # List all repos in the organization
@@ -25,8 +28,11 @@
 #   # Generate YAML for specific repos
 #   ./scripts/onboard-repos.sh --generate-yaml repo1 repo2 repo3
 #
-#   # Import specific repos into Terraform
+#   # Import specific repos into Terraform (direct layout - this repo as root)
 #   ./scripts/onboard-repos.sh --import repo1 repo2
+#
+#   # Import repos when using the module from a consumer root
+#   ./scripts/onboard-repos.sh --module-path "module.github_org." --import repo1 repo2
 #
 #   # Full onboarding: generate YAML and import
 #   ./scripts/onboard-repos.sh --generate-yaml --import repo1 repo2
@@ -37,7 +43,7 @@
 # Requirements:
 #   - gh CLI (GitHub CLI) installed and authenticated
 #   - yq (YAML processor) for reading config - falls back to Python if not available
-#   - terraform initialized in terraform/ directory (for --import)
+#   - terraform initialized in the project root directory (for --import)
 #
 
 set -euo pipefail
@@ -60,10 +66,11 @@ GENERATE_YAML=false
 IMPORT=false
 LIST=false
 FILTER=""
+MODULE_PATH=""
 DRY_RUN=false
 REPOS=()
 
-# Configuration paths
+# Configuration paths (matching Terraform's yaml-config.tf)
 REPOSITORY_CONFIG_PATH="$PROJECT_ROOT/config/repository"
 
 # Helper functions
@@ -207,14 +214,9 @@ import_repo() {
     local repo="$2"
     local dry_run="$3"
 
-    local tf_dir="$PROJECT_ROOT/terraform"
+    local tf_dir="$PROJECT_ROOT"
 
-    if [[ ! -d "$tf_dir" ]]; then
-        log_error "Terraform directory not found: $tf_dir"
-        return 1
-    fi
-
-    local import_addr="module.github_org.module.repositories[\"$repo\"].github_repository.this"
+    local import_addr="${MODULE_PATH}module.repositories[\"$repo\"].github_repository.this"
     # GitHub provider expects just the repo name when owner is configured in provider
     local import_id="$repo"
 
@@ -259,6 +261,10 @@ parse_args() {
                 ;;
             -f|--filter)
                 FILTER="$2"
+                shift 2
+                ;;
+            -m|--module-path)
+                MODULE_PATH="$2"
                 shift 2
                 ;;
             -d|--dry-run)

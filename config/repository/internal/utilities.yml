@@ -1,0 +1,34 @@
+# Personal Utilities
+# Small personal tools and automation bots
+
+# https://github.com/gjed/renovate-config
+renovate-config:
+  description: "Configuration for Renovate bot"
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+    - renovate
+
+# https://github.com/gjed/whisperx-api-server
+whisperx-api-server:
+  description: "FastAPI server for WhisperX transcription library"
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+    - whisperx
+
+# https://github.com/gjed/sinapsi-converter
+sinapsi-converter:
+  description: "Simple tool to convert Sinapsi CSV to XLSX files"
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+    - sinapsi
+
+# https://github.com/gjed/siemens-converter
+siemens-converter:
+  description: "Simple tool to convert siemens CSV to XLSX files"
+  groups: ["gjed", "oss"]
+  topics:
+    - github
+    - siemens

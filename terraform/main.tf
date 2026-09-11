@@ -13,7 +13,7 @@ terraform {
   required_providers {
     github = {
       source  = "integrations/github"
-      version = "~> 6.0"
+      version = ">= 6.12.0, < 7.0.0"
     }
   }
 
@@ -39,7 +39,7 @@ provider "github" {
 
 module "github_org" {
   source  = "gjed/config-as-yaml/github"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   # Path to the config directory relative to this file.
   # Must be a static string - computed values are not supported.

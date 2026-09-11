@@ -1,0 +1,69 @@
+# Archived Public Repositories
+# These repositories are archived and no longer actively maintained.
+# They are kept here for reference but commented out so Terraform does not manage them.
+# To re-activate a repo, uncomment its entry and run terraform apply.
+
+# https://github.com/gjed/sembenini-bot
+# sembenini-bot:
+#   description: "Bot for get notified when Dr. Paolo Sembenini appointments are available in Verona"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - github
+#     - bot
+
+# https://github.com/gjed/cieverona-bot
+# cieverona-bot:
+#   description: "Bot for get notified when CIE appointments are available in Verona"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - github
+#     - cie
+#     - verona
+#     - bot
+
+# https://github.com/gjed/demo-otel-weaver-old
+# demo-otel-weaver-old:
+#   description: "Demo for OpenTelemetry Weaver talk (superseded by demo-otel-weaver)"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - opentelemetry
+#     - weaver
+#     - demo
+
+# https://github.com/gjed/workshop-2026-k8s
+# workshop-2026-k8s:
+#   description: "Kubernetes workshop for 2026 IDI Devops Bologna"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - kubernetes
+#     - workshop
+
+# https://github.com/gjed/k3s-demo
+# k3s-demo:
+#   description: "k3s-demo"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - kubernetes
+#     - k3s
+#     - demo
+
+# https://github.com/gjed/wireguard-prometheus-exporter-mod
+# wireguard-prometheus-exporter-mod:
+#   description: "Docker mod for wireguard prometheus exporter"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - wireguard
+#     - prometheus
+#     - docker
+
+# https://github.com/gjed/grafana-api-collections
+# grafana-api-collections:
+#   description: "A collection of requests for Grafana HTTP Api"
+#   groups: ["gjed", "oss"]
+#   topics:
+#     - grafana
+#     - api
+
+# Required: yamldecode() needs a valid map (not null) so Terraform's merge() does not fail.
+# Remove this line when the first repo above is uncommented.
+{}
