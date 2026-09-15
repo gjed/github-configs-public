@@ -25,6 +25,7 @@ jenkins-opentelemetry-dashboards:
 terraform-github-config-as-yaml:
   description: "Github repository configurations managed via YAML"
   groups: ["gjed", "oss"]
+  homepage_url: "https://registry.terraform.io/modules/gjed/config-as-yaml/github/latest"
   topics:
     - github
     - terraform
