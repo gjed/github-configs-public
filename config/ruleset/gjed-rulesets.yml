@@ -22,6 +22,26 @@ gjed-oss-main:
     - type: non_fast_forward
     - type: required_linear_history
     - type: required_signatures
+
+# Pull-request review requirement, split out from gjed-oss-main so it can be
+# assigned independently. Not currently assigned to any group or repository —
+# kept here as a ready-to-use rule definition, not applied to oss repos.
+gjed-oss-review:
+  target: branch
+  enforcement: active
+  bypass_actors:
+    - actor_type: RepositoryRole
+      actor_id: 2  # Maintain role
+      bypass_mode: always
+    - actor_type: RepositoryRole
+      actor_id: 5  # Admin role
+      bypass_mode: always
+  conditions:
+    ref_name:
+      include:
+        - "~DEFAULT_BRANCH"
+      exclude: []
+  rules:
     - type: pull_request
       parameters:
         required_approving_review_count: 1
