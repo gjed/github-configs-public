@@ -39,7 +39,7 @@ provider "github" {
 
 module "github_org" {
   source  = "gjed/config-as-yaml/github"
-  version = "~> 1.1"
+  version = "~> 1.4"
 
   # Path to the config directory relative to this file.
   # Must be a static string - computed values are not supported.
