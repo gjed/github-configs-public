@@ -104,39 +104,28 @@ def load_yaml_directory(directory: Path) -> dict:
     return merged
 
 
-def load_repository_config(
-    repository_dir: Path, requested_partitions: list[str]
-) -> dict:
-    """Load repository YAML, merging top-level files with active partition subdirs.
+def load_repository_config(directory: Path, requested_partitions: list[str]) -> dict:
+    """Load repository definitions, including partition subdirectories.
 
-    Mirrors the loading logic in yaml-config.tf: top-level *.yml files under
-    config/repository/ are always loaded; *.yml files inside immediate
-    subdirectories (partitions) are loaded only when that partition is active
-    (empty requested_partitions == all discovered partitions are active).
-
-    Upstream's load_yaml_directory() only globs *.yml non-recursively, so it
-    silently ignores partitioned repository files entirely (validated against
-    v1.1.1 — reports zero repositories for a fully partitioned config/repository/
-    tree with no error or warning). This loader fixes that gap for the local
-    pre-commit validate-config hook; Terraform itself already loads partitions
-    correctly via yaml-config.tf.
+    Mirrors the partition-aware file collection in yaml-config.tf:
+    top-level *.yml files are always loaded, plus *.yml from each active
+    partition subdirectory. An empty `requested_partitions` means all
+    discovered partitions are active.
     """
-    if not repository_dir.exists():
+    if not directory.exists():
         return {}
 
-    merged = load_yaml_directory(repository_dir)
+    merged = load_yaml_directory(directory)
 
-    discovered_partitions = sorted(
-        d.name for d in repository_dir.iterdir() if d.is_dir()
-    )
-    active_partitions = (
-        discovered_partitions if not requested_partitions else requested_partitions
+    available = sorted(d.name for d in directory.iterdir() if d.is_dir())
+    active = (
+        available
+        if not requested_partitions
+        else [p for p in available if p in requested_partitions]
     )
 
-    for partition in active_partitions:
-        partition_dir = repository_dir / partition
-        if partition_dir.is_dir():
-            merged.update(load_yaml_directory(partition_dir))
+    for partition in active:
+        merged.update(load_yaml_directory(directory / partition))
 
     return merged
 
@@ -934,6 +923,62 @@ def validate_branch_protection_references(
     return errors
 
 
+def resolve_effective_visibility(repo_config: dict, groups: dict) -> str:
+    """Resolve a repository's effective visibility after group inheritance.
+
+    Mirrors the Terraform merge order in local.merged_configs: groups are applied in
+    order with later groups overriding earlier ones, then the repo-level key wins.
+    Defaults to 'private', matching local.repo_visibility.
+    """
+    visibility = "private"
+
+    for group_name in repo_config.get("groups", []) or []:
+        group_config = groups.get(group_name)
+        if isinstance(group_config, dict) and group_config.get("visibility"):
+            visibility = group_config["visibility"]
+
+    if repo_config.get("visibility"):
+        visibility = repo_config["visibility"]
+
+    return visibility
+
+
+def validate_branch_protection_tier(
+    repos: dict, groups: dict, subscription: str
+) -> list[str]:
+    """Warn when branch protections are configured for private repos on the free tier.
+
+    GitHub offers protected branches on private repositories only for paid plans, so
+    Terraform skips them on free. Surfacing this before plan avoids a silent no-op.
+
+    Returns a list of warning messages.
+    """
+    if subscription != "free":
+        return []
+
+    warnings: list[str] = []
+
+    for repo_name, repo_config in repos.items():
+        if not isinstance(repo_config, dict):
+            continue
+
+        has_protections = bool(repo_config.get("branch_protections")) or any(
+            isinstance(groups.get(g), dict) and groups[g].get("branch_protections")
+            for g in repo_config.get("groups", []) or []
+        )
+        if not has_protections:
+            continue
+
+        if resolve_effective_visibility(repo_config, groups) != "public":
+            warnings.append(
+                f"repositories: Repository '{repo_name}' is private and has branch "
+                f"protections, but protected branches require a paid GitHub plan on "
+                f"private repositories — they will be skipped by Terraform"
+            )
+
+    return warnings
+
+
 def validate_partitions(
     repository_dir: Path, requested_partitions: list[str]
 ) -> tuple[list[str], list[str]]:
@@ -1083,6 +1128,11 @@ def main():
     all_errors.extend(validate_branch_protections(branch_protections))
     all_errors.extend(
         validate_branch_protection_references(repos, groups, branch_protections)
+    )
+    all_warnings.extend(
+        validate_branch_protection_tier(
+            repos, groups, config.get("subscription", "free")
+        )
     )
 
     # Print SCIM/SSO reminder when membership config is present
