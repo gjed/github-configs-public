@@ -63,7 +63,3 @@
 #   topics:
 #     - grafana
 #     - api
-
-# Required: yamldecode() needs a valid map (not null) so Terraform's merge() does not fail.
-# Remove this line when the first repo above is uncommented.
-{}
