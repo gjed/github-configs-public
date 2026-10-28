@@ -29,6 +29,10 @@ terraform-github-config-as-yaml:
   topics:
     - github
     - terraform
+  rulesets:
+    - gjed-oss-review
+    - terraform-github-config-as-yaml-ci
+    - gjed-release-tags
 
 # https://github.com/gjed/github-configs-public
 github-configs-public:
