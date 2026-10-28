@@ -24,8 +24,9 @@ gjed-oss-main:
     - type: required_signatures
 
 # Pull-request review requirement, split out from gjed-oss-main so it can be
-# assigned independently. Not currently assigned to any group or repository —
-# kept here as a ready-to-use rule definition, not applied to oss repos.
+# assigned independently. Assigned per repository (not to the oss group) where
+# outside collaborators have write access: they must open a pull request and
+# get one code-owner approval, while maintainers and admins can bypass.
 gjed-oss-review:
   target: branch
   enforcement: active
@@ -48,3 +49,59 @@ gjed-oss-review:
         dismiss_stale_reviews_on_push: true
         require_code_owner_review: true
         require_last_push_approval: false
+
+# CI gates for terraform-github-config-as-yaml. The contexts are the job ids
+# in that repository's .github/workflows/ci.yml; renaming a job there strands
+# every open pull request on the old name. integration_id pins each check to
+# the GitHub Actions app so a commit status with the same name cannot satisfy it.
+terraform-github-config-as-yaml-ci:
+  target: branch
+  enforcement: active
+  bypass_actors:
+    - actor_type: RepositoryRole
+      actor_id: 2  # Maintain role
+      bypass_mode: always
+    - actor_type: RepositoryRole
+      actor_id: 5  # Admin role
+      bypass_mode: always
+  conditions:
+    ref_name:
+      include:
+        - "~DEFAULT_BRANCH"
+      exclude: []
+  rules:
+    - type: required_status_checks
+      parameters:
+        strict_required_status_checks_policy: false
+        required_checks:
+          - context: pre-commit
+            integration_id: 15368  # GitHub Actions
+          - context: pytest
+            integration_id: 15368
+          - context: terraform-test
+            integration_id: 15368
+
+# Release tags are created only by the release workflow. A pushed v* tag is
+# picked up by the Terraform Registry and published to every consumer, so
+# write collaborators must not be able to create, move or delete one.
+# Bypass: admins, and the GitHub Actions app (semantic-release pushes the tag
+# with GITHUB_TOKEN).
+gjed-release-tags:
+  target: tag
+  enforcement: active
+  bypass_actors:
+    - actor_type: RepositoryRole
+      actor_id: 5  # Admin role
+      bypass_mode: always
+    - actor_type: Integration
+      actor_id: 15368  # GitHub Actions
+      bypass_mode: always
+  conditions:
+    ref_name:
+      include:
+        - "refs/tags/v*"
+      exclude: []
+  rules:
+    - type: creation
+    - type: update
+    - type: deletion
