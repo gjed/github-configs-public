@@ -29,6 +29,8 @@ terraform-github-config-as-yaml:
   topics:
     - github
     - terraform
+  collaborators:
+    M0Rf30: push
   rulesets:
     - gjed-oss-review
     - terraform-github-config-as-yaml-ci
