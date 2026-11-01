@@ -84,8 +84,9 @@ terraform-github-config-as-yaml-ci:
 # Release tags are created only by the release workflow. A pushed v* tag is
 # picked up by the Terraform Registry and published to every consumer, so
 # write collaborators must not be able to create, move or delete one.
-# Bypass: admins, and the GitHub Actions app (semantic-release pushes the tag
-# with GITHUB_TOKEN).
+# Bypass: admins, and the gjed-release GitHub App, whose token the release
+# workflow hands to semantic-release. The built-in GitHub Actions app cannot
+# be a bypass actor on a personal account, so GITHUB_TOKEN is not enough.
 gjed-release-tags:
   target: tag
   enforcement: active
@@ -94,7 +95,7 @@ gjed-release-tags:
       actor_id: 5  # Admin role
       bypass_mode: always
     - actor_type: Integration
-      actor_id: 15368  # GitHub Actions
+      actor_id: 5566709  # gjed-release GitHub App
       bypass_mode: always
   conditions:
     ref_name:
