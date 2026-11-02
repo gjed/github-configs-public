@@ -2,9 +2,6 @@
 # Main branch protection for OSS with maintainer bypass
 # Allows repository maintainers and admins to bypass branch protection
 # Suitable for open source projects where maintainers need flexibility
-# The gjed-release GitHub App also bypasses it: semantic-release commits
-# release files (e.g. CHANGELOG.md via @semantic-release/git) straight to main,
-# and those commits are unsigned.
 gjed-oss-main:
   target: branch
   enforcement: active
@@ -14,9 +11,6 @@ gjed-oss-main:
       bypass_mode: always
     - actor_type: RepositoryRole
       actor_id: 5  # Admin role
-      bypass_mode: always
-    - actor_type: Integration
-      actor_id: 5566709  # gjed-release GitHub App
       bypass_mode: always
   conditions:
     ref_name:
