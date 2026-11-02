@@ -29,3 +29,24 @@ oss:
     - gjed-oss-main
   # Note: Dependabot configuration is managed manually in each repository
   # because Terraform cannot create PRs (required by branch protection rules)
+
+# Same as oss, but main is protected by gjed-oss-main-gjed-release-bypass
+# instead of gjed-oss-main. Keep the settings in sync with oss.
+oss-gjed-release-bypass:
+  visibility: public
+  has_wiki: true
+  has_issues: true
+  has_projects: false
+  has_discussions: true
+  allow_merge_commit: false
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  allow_update_branch: true
+  delete_branch_on_merge: true
+  web_commit_signoff_required: true
+  require_linear_history: true
+  topics:
+    - oss
+  rulesets:
+    - gjed-oss-main-gjed-release-bypass

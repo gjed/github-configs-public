@@ -4,6 +4,6 @@
 # https://github.com/gjed/gjed
 gjed:
   description: "Config files for my GitHub profile."
-  groups: ["gjed", "oss"]
+  groups: ["gjed", "oss-gjed-release-bypass"]
   topics:
     - github

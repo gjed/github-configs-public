@@ -23,6 +23,35 @@ gjed-oss-main:
     - type: required_linear_history
     - type: required_signatures
 
+# Same as gjed-oss-main, plus a bypass for the gjed-release GitHub App.
+# Only for gjed/gjed, whose metrics workflow pushes an unsigned commit with the
+# metrics SVGs straight to main every day. Assigned through the
+# oss-gjed-release-bypass group, never alongside gjed-oss-main: rulesets stack,
+# so a bypass here does not skip gjed-oss-main.
+gjed-oss-main-gjed-release-bypass:
+  target: branch
+  enforcement: active
+  bypass_actors:
+    - actor_type: RepositoryRole
+      actor_id: 2  # Maintain role
+      bypass_mode: always
+    - actor_type: RepositoryRole
+      actor_id: 5  # Admin role
+      bypass_mode: always
+    - actor_type: Integration
+      actor_id: 5566709  # gjed-release GitHub App
+      bypass_mode: always
+  conditions:
+    ref_name:
+      include:
+        - "~DEFAULT_BRANCH"
+      exclude: []
+  rules:
+    - type: deletion
+    - type: non_fast_forward
+    - type: required_linear_history
+    - type: required_signatures
+
 # Pull-request review requirement, split out from gjed-oss-main so it can be
 # assigned independently. Assigned per repository (not to the oss group) where
 # outside collaborators have write access: they must open a pull request and
