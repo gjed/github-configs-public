@@ -56,6 +56,8 @@ gjed-oss-main-gjed-release-bypass:
 # assigned independently. Assigned per repository (not to the oss group) where
 # outside collaborators have write access: they must open a pull request and
 # get one code-owner approval, while maintainers and admins can bypass.
+# The gjed-renovate GitHub App can bypass on pull requests only, so it can
+# merge its own dependency updates; it cannot push to the branch directly.
 gjed-oss-review:
   target: branch
   enforcement: active
@@ -66,6 +68,9 @@ gjed-oss-review:
     - actor_type: RepositoryRole
       actor_id: 5  # Admin role
       bypass_mode: always
+    - actor_type: Integration
+      actor_id: 5592240  # gjed-renovate GitHub App
+      bypass_mode: pull_request
   conditions:
     ref_name:
       include:
