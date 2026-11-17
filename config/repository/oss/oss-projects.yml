@@ -62,3 +62,15 @@ github-activity-exporter:
     - renovate
     - opentelemetry
     - exporter
+
+# https://github.com/gjed/okf-operator
+okf-operator:
+  description: "Keeps an Open Knowledge Format bundle in sync with merged pull requests"
+  groups: ["gjed", "oss"]
+  license: "apache-2.0"
+  topics:
+    - okf
+    - knowledge-base
+    - argo-workflows
+    - mcp
+    - golang
