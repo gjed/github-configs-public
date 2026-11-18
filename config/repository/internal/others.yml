@@ -7,3 +7,15 @@ songbooks:
     - songbooks
     - music
     - ukulele
+
+# https://github.com/gjed/roadsurfer-rally-map
+roadsurfer-rally-map:
+  description: "Nightly map of roadsurfer Rally one-way camper van offers"
+  groups: ["gjed", "oss"]
+  license: "apache-2.0"
+  homepage_url: "https://gjed.github.io/roadsurfer-rally-map/"
+  topics:
+    - roadsurfer
+    - camper-van
+    - leaflet
+    - github-pages
