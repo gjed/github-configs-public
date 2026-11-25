@@ -29,6 +29,8 @@ sinapsi-converter:
 siemens-converter:
   description: "Simple tool to convert siemens CSV to XLSX files"
   groups: ["gjed", "oss"]
+  homepage_url: "https://gjed.github.io/siemens-converter/"
   topics:
     - github
     - siemens
+    - github-pages
