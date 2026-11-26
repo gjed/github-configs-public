@@ -7,3 +7,12 @@ gjed:
   groups: ["gjed", "oss-gjed-release-bypass"]
   topics:
     - github
+
+# https://github.com/gjed/gjed.github.io
+gjed.github.io:
+  description: "Homepage listing the gjed projects published on GitHub Pages."
+  groups: ["gjed", "oss"]
+  homepage_url: "https://gjed.github.io/"
+  topics:
+    - github
+    - github-pages
