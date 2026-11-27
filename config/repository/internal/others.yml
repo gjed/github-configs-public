@@ -19,3 +19,15 @@ roadsurfer-rally-map:
     - camper-van
     - leaflet
     - github-pages
+
+# https://github.com/gjed/singing-practice
+singing-practice:
+  description: "Vocal exercises with a generated piano accompaniment"
+  groups: ["gjed", "oss"]
+  homepage_url: "https://gjed.github.io/singing-practice/"
+  topics:
+    - music
+    - singing
+    - vocal-exercises
+    - strudel
+    - github-pages
